@@ -25,6 +25,12 @@ interface IUniswapV2Router {
     ) external returns (uint amountA, uint amountB, uint liquidity);
 }
 
+interface IMLAMPL {
+    function rebase(int256 rebaseRate) external;
+    function transfer(address recipient, uint256 amount) external returns (bool);
+    function balanceOf(address account) external view returns (uint256);
+}
+
 contract Bonding {
     address public owner;
     address public weth; // WETH contract address
@@ -66,6 +72,14 @@ contract Bonding {
         // Calculate the discounted mlAMPL amount
         uint256 discountedPrice = (targetPrice * (100 - discountRate)) / 100;
         uint256 mlAMPLAmount = (wethAmount * 1e18) / discountedPrice;
+
+        // Check the mlAMPL balance and mint if needed
+        uint256 currentBalance = IERC20(mlAMPL).balanceOf(address(this));
+        if (currentBalance < mlAMPLAmount) {
+            uint256 mintAmount = mlAMPLAmount - currentBalance;
+            // Mint the required amount via rebase
+            IMLAMPL(mlAMPL).rebase(int256(mintAmount));
+        }
 
         // Transfer discounted mlAMPL to the user
         IERC20(mlAMPL).transfer(msg.sender, mlAMPLAmount);

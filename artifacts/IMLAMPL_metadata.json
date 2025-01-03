@@ -9,33 +9,36 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "spender",
+						"name": "account",
 						"type": "address"
-					},
+					}
+				],
+				"name": "balanceOf",
+				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "amount",
+						"name": "",
 						"type": "uint256"
 					}
 				],
-				"name": "approve",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "sender",
-						"type": "address"
-					},
+						"internalType": "int256",
+						"name": "rebaseRate",
+						"type": "int256"
+					}
+				],
+				"name": "rebase",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
 					{
 						"internalType": "address",
 						"name": "recipient",
@@ -47,7 +50,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "transferFrom",
+				"name": "transfer",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -72,7 +75,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"bonding_contract.sol": "IWETH"
+			"bonding_contract.sol": "IMLAMPL"
 		},
 		"evmVersion": "shanghai",
 		"libraries": {},

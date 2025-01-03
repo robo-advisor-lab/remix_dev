@@ -143,6 +143,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "uniswapRouter",
 				"outputs": [
@@ -167,6 +180,24 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "lpToken",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "withdrawLiquidity",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -182,7 +213,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"bonding_contract.sol": "Bonding"
+			"bonding_contract.sol": "ProtocolOwnedLiquidity"
 		},
 		"evmVersion": "shanghai",
 		"libraries": {},
@@ -197,11 +228,11 @@
 	},
 	"sources": {
 		"bonding_contract.sol": {
-			"keccak256": "0x010bcc26f8f521621b02f6383b558aba6d2a551717adf994b51fafb963cca29c",
+			"keccak256": "0x85f487b65593c42b4fa6344961681be0cdbafe36fae31c7361072bbc7fe6121f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7880a4c0db82f5c5a9cc206e6177017b9e3785d1c37b37c0b7aae8d9e8268a92",
-				"dweb:/ipfs/QmZDUSxWpDkf2HtaJaFTArb7sXRdUYebgVBGVDnvQckv8J"
+				"bzz-raw://24d94fd4dae899cdc5e50997f22e089bfd83eff7a525860598d6897c2c6ea698",
+				"dweb:/ipfs/Qmd8mkbqKNLuQPp8FsK6TMcV2TYaQbodwhPXi8ti3DVo6Y"
 			]
 		}
 	},
