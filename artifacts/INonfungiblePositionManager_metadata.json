@@ -1,0 +1,137 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "token0",
+								"type": "address"
+							},
+							{
+								"internalType": "address",
+								"name": "token1",
+								"type": "address"
+							},
+							{
+								"internalType": "uint24",
+								"name": "fee",
+								"type": "uint24"
+							},
+							{
+								"internalType": "int24",
+								"name": "tickLower",
+								"type": "int24"
+							},
+							{
+								"internalType": "int24",
+								"name": "tickUpper",
+								"type": "int24"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount0Desired",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount1Desired",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount0Min",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "amount1Min",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "recipient",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "deadline",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct INonfungiblePositionManager.MintParams",
+						"name": "params",
+						"type": "tuple"
+					}
+				],
+				"name": "mint",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint128",
+						"name": "liquidity",
+						"type": "uint128"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount0",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount1",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"bonding_full.sol": "INonfungiblePositionManager"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"bonding_full.sol": {
+			"keccak256": "0x568525a876b09085b6e194e4e417d48f0e5679a53347950e689f754039e825f1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d0f0cf2bb3088c5ffe6f2e1388457cf27495a8a65aee0821ed885e52d4ecfa36",
+				"dweb:/ipfs/QmYzqNtevLUrrX1gzxdmj2xH1bhrx4FgiqXFEJa3nvKxsB"
+			]
+		}
+	},
+	"version": 1
+}

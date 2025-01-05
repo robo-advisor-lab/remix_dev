@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.22+commit.4fc1097e"
+		"version": "0.8.28+commit.7893614a"
 	},
 	"language": "Solidity",
 	"output": {
@@ -27,14 +27,45 @@
 			{
 				"inputs": [
 					{
-						"internalType": "int256",
-						"name": "rebaseRate",
-						"type": "int256"
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
 					}
 				],
-				"name": "rebase",
+				"name": "initializeSupply",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "mint",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -77,7 +108,7 @@
 		"compilationTarget": {
 			"bonding_contract.sol": "IMLAMPL"
 		},
-		"evmVersion": "shanghai",
+		"evmVersion": "cancun",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -90,11 +121,11 @@
 	},
 	"sources": {
 		"bonding_contract.sol": {
-			"keccak256": "0x010bcc26f8f521621b02f6383b558aba6d2a551717adf994b51fafb963cca29c",
+			"keccak256": "0xe81211db0bfa92ccc91f12427c560163f938346ba2bce4f400492cf2b91cab36",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7880a4c0db82f5c5a9cc206e6177017b9e3785d1c37b37c0b7aae8d9e8268a92",
-				"dweb:/ipfs/QmZDUSxWpDkf2HtaJaFTArb7sXRdUYebgVBGVDnvQckv8J"
+				"bzz-raw://e10a921252d397a9ee6aae14261712599a0af06d37962a50f6db0712ef378541",
+				"dweb:/ipfs/QmY2NzU3bEu9AEaFcc6aabRgbSifCR7YEpnBa3UPrMgMF7"
 			]
 		}
 	},

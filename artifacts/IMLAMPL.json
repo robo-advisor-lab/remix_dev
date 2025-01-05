@@ -50,7 +50,9 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {
 			"balanceOf(address)": "70a08231",
-			"rebase(int256)": "0ab114f9",
+			"initializeSupply(uint256)": "d9e63bb1",
+			"mint(address,uint256)": "40c10f19",
+			"totalSupply()": "18160ddd",
 			"transfer(address,uint256)": "a9059cbb"
 		}
 	},
@@ -77,14 +79,45 @@
 		{
 			"inputs": [
 				{
-					"internalType": "int256",
-					"name": "rebaseRate",
-					"type": "int256"
+					"internalType": "uint256",
+					"name": "amount",
+					"type": "uint256"
 				}
 			],
-			"name": "rebase",
+			"name": "initializeSupply",
 			"outputs": [],
 			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "to",
+					"type": "address"
+				},
+				{
+					"internalType": "uint256",
+					"name": "amount",
+					"type": "uint256"
+				}
+			],
+			"name": "mint",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [],
+			"name": "totalSupply",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "view",
 			"type": "function"
 		},
 		{
