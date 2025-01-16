@@ -35,18 +35,21 @@ contract Bonding {
     address public weth; // WETH contract address
     address public mlAMPL; // mlAMPL contract address
 
-    uint256 public discountRate = 5; // 5% discount
-    uint256 public targetPrice = 367377597059803; // Example target price (1 mlAMPL = 1 WETH in wei)
+    uint256 public discountRate;
+    uint256 public targetPrice;
 
     event BondPurchased(address indexed user, uint256 wethAmount, uint256 mlAMPLAmount);
     event Debug(string message, uint256 value);
     event OwnershipTransferred(address indexed oldOwner, address indexed newOwner);
     event Withdrawn(address indexed token, address indexed recipient, uint256 amount);
 
-    constructor(address _weth, address _mlAMPL) {
+    constructor(address _weth, address _mlAMPL, uint256 _discountRate, uint256 _targetPrice) {
         owner = msg.sender;
         weth = _weth;
         mlAMPL = _mlAMPL;
+        discountRate = _discountRate;
+        targetPrice = _targetPrice;
+        
     }
 
     modifier onlyOwner() {

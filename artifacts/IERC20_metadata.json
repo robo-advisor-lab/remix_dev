@@ -217,11 +217,11 @@
 	},
 	"sources": {
 		"bonding_contract.sol": {
-			"keccak256": "0xe81211db0bfa92ccc91f12427c560163f938346ba2bce4f400492cf2b91cab36",
+			"keccak256": "0x1876206f04e117a4256e1be5fc93ba3d36e80f13befc795b53ee68ce259e5401",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e10a921252d397a9ee6aae14261712599a0af06d37962a50f6db0712ef378541",
-				"dweb:/ipfs/QmY2NzU3bEu9AEaFcc6aabRgbSifCR7YEpnBa3UPrMgMF7"
+				"bzz-raw://62d55aaa95241e864985384ad58067566c3a96db627e0def9efea24fd14200c0",
+				"dweb:/ipfs/QmcQg6ihJi8EDpywe6J9hpiHracKaEKDi55gQFiVxdaf7B"
 			]
 		}
 	},

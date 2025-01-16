@@ -509,6 +509,24 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "burn",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
 						"name": "account",
 						"type": "address"
 					},
@@ -521,6 +539,19 @@
 				"name": "burnFrom",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "buyback_contract",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -826,6 +857,19 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_buybackContract",
+						"type": "address"
+					}
+				],
+				"name": "setBuybackContract",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -1367,11 +1411,11 @@
 			]
 		},
 		"mlAMPl_deploy.sol": {
-			"keccak256": "0xbe9d945591462781035162143b24837e7eb956b5d4fb93dc80a2e833ebde6859",
+			"keccak256": "0x2a949b9d0f1b4f4a712ddb96e6a9c2d4c203d6a2fec23aa4864f75bef32c4bb8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4e288ddb1144538b7114d284291d7db86dbc1e27b5170a7bade5d4fefbd688a7",
-				"dweb:/ipfs/QmWryLd9df8MCxDmnAuHjsToGshUnpbzC25AXDz17PJqay"
+				"bzz-raw://79b9682babbd66cb8210d7d38a77d705e3accdc2b45e03a24f5544bffeaded48",
+				"dweb:/ipfs/QmVKU3NPozpC4mpXgtgrjcQje8wbi6eaAYZgRpxiae6Tfz"
 			]
 		}
 	},

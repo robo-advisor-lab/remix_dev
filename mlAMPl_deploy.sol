@@ -16,6 +16,7 @@ contract MLAMPL is ERC20, ERC20Burnable, Ownable, ERC20Permit {
     
     bool private initialized = false;
     address public rebaseRecipient;
+    address public buyback_contract;
 
     uint256 public totalStaked;
     uint256 public rewardRate;
@@ -32,10 +33,16 @@ contract MLAMPL is ERC20, ERC20Burnable, Ownable, ERC20Permit {
         Ownable(initialOwner)
     {
         rebaseRecipient = initialOwner;
+        buyback_contract = initialOwner;
     }
 
     modifier onlyRebaseRecipientOrOwner() {
         require(msg.sender == owner() || msg.sender == rebaseRecipient, "Caller is not authorized");
+        _;
+    }
+
+    modifier onlybuybackcontract() {
+        require(msg.sender == owner() || msg.sender == buyback_contract, "Caller is not authorized");
         _;
     }
 
@@ -155,11 +162,15 @@ contract MLAMPL is ERC20, ERC20Burnable, Ownable, ERC20Permit {
         emit Rebase(rebaseRate, newTotalSupply);
     }
 
-     function mint(address to, uint256 amount) external onlyRebaseRecipientOrOwner {
+    function mint(address to, uint256 amount) external onlyRebaseRecipientOrOwner {
         require(amount > 0, "Mint amount must be greater than zero");
         _mint(to, amount);
     }
 
+    function burn(address to, uint256 amount) external onlybuybackcontract {
+        require(amount > 0, "Burn amount must be greater than zero");
+        _burn(to, amount);
+    }
 
     function setRebaseRecipient(address newRecipient) external onlyOwner {
         require(newRecipient != address(0), "Invalid recipient address");
@@ -167,4 +178,10 @@ contract MLAMPL is ERC20, ERC20Burnable, Ownable, ERC20Permit {
         rebaseRecipient = newRecipient;
         emit RebaseRecipientUpdated(oldRecipient, newRecipient);
     }
+
+    function setBuybackContract(address _buybackContract) external onlyOwner {
+    require(_buybackContract != address(0), "Invalid buyback contract address");
+    buyback_contract = _buybackContract;
+}
+
 }
