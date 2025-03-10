@@ -1,0 +1,400 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_paymentToken",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_roboMoney",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_premiumRate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_targetPrice",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "buyer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "roboMoneyAmount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tokenSpent",
+						"type": "uint256"
+					}
+				],
+				"name": "BuyBackExecuted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "Paused",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "Unpaused",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "roboMoneyAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "buyback",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "roboMoneyAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "canExecuteBuyback",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "contractTokenBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "depositPaymentToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "maxBuyableRoboMoney",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "pause",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "paused",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "paymentToken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "premiumRate",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "roboMoney",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_premiumRate",
+						"type": "uint256"
+					}
+				],
+				"name": "setPremiumRate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_targetPrice",
+						"type": "uint256"
+					}
+				],
+				"name": "setTargetPrice",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "targetPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "unpause",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "withdrawPaymentToken",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "A contract that lets users sell (buy back) RoboMoney tokens for a paymentToken,      and then burns the RoboMoney tokens.      Now includes Pausable functionality so the owner can temporarily halt deposits or buybacks.",
+			"kind": "dev",
+			"methods": {
+				"buyback(uint256)": {
+					"details": "`whenNotPaused` ensures no buybacks are processed if contract is paused.",
+					"params": {
+						"roboMoneyAmount": "Amount of RoboMoney tokens to sell/buy back."
+					}
+				},
+				"canExecuteBuyback(uint256)": {
+					"details": "Checks if the contract has enough payment tokens to buy back `roboMoneyAmount`      at the current premium rate."
+				},
+				"contractTokenBalance()": {
+					"details": "Returns the current contract balance of the payment token."
+				},
+				"depositPaymentToken(uint256)": {
+					"details": "Owner can deposit payment tokens into the contract to fund future buybacks.Protected by `whenNotPaused` so you can prevent deposits if needed."
+				},
+				"maxBuyableRoboMoney()": {
+					"details": "Returns the maximum amount of RoboMoney the contract can buy back given its current payment token balance and the premium rate."
+				},
+				"pause()": {
+					"details": "Owner can pause the contract (disables buyback & deposit)."
+				},
+				"setPremiumRate(uint256)": {
+					"details": "Sets the premium rate (in %). e.g., 5 => 5% premium."
+				},
+				"setTargetPrice(uint256)": {
+					"details": "Sets the base price ratio for RoboMoney vs. payment token."
+				},
+				"transferOwnership(address)": {
+					"details": "Owner can transfer ownership."
+				},
+				"unpause()": {
+					"details": "Owner can unpause the contract (re-enables buyback & deposit)."
+				},
+				"withdrawPaymentToken(uint256)": {
+					"details": "Owner can withdraw payment tokens from the contract (for leftover tokens, etc.).      This is still allowed even if paused, in case you need to remove funds in an emergency."
+				}
+			},
+			"title": "BuyBack",
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"buyback(uint256)": {
+					"notice": "Buys back RoboMoney from msg.sender at the configured premium rate, paying out the specified ERC20 `paymentToken`, and then burns the RoboMoney."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/buy_back.sol": "BuyBack"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/buy_back.sol": {
+			"keccak256": "0xfb4d583ece73a105447df2577e6ce8d127190da23885a1e0dd3c4368e226b895",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4ddb090997facf8b0a9f6cfd32723115298b5326bad6b0650dd1b4f2eb2f616d",
+				"dweb:/ipfs/QmaYkxCHSSyfZrWQCgQRWxJL8pFS9RdCf6DJHGhYshoETt"
+			]
+		}
+	},
+	"version": 1
+}

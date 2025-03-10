@@ -190,6 +190,7 @@
 			}
 		],
 		"devdoc": {
+			"details": "Generic ERC20 interface (used for the payment token).",
 			"kind": "dev",
 			"methods": {},
 			"version": 1
@@ -210,18 +211,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"bonding_contract.sol": {
-			"keccak256": "0x1876206f04e117a4256e1be5fc93ba3d36e80f13befc795b53ee68ce259e5401",
+			"keccak256": "0x93df4d2825e0bdb0211f29a686298f5d979461eeefb5bbe992d361d3294f92ef",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://62d55aaa95241e864985384ad58067566c3a96db627e0def9efea24fd14200c0",
-				"dweb:/ipfs/QmcQg6ihJi8EDpywe6J9hpiHracKaEKDi55gQFiVxdaf7B"
+				"bzz-raw://0108dd4e3a4394d5c64711f2d6fa0c41a9477a7645fb72e27b8d1051073084eb",
+				"dweb:/ipfs/QmZSbMwzMNjjx22HbXhhddXu8GfLcT9CnYEocn9V5wgcf7"
 			]
 		}
 	},

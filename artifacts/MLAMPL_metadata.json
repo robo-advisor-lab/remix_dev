@@ -1236,7 +1236,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -1411,11 +1411,11 @@
 			]
 		},
 		"mlAMPl_deploy.sol": {
-			"keccak256": "0x2a949b9d0f1b4f4a712ddb96e6a9c2d4c203d6a2fec23aa4864f75bef32c4bb8",
+			"keccak256": "0x556fdbc65b9af1f69570ee9345c44655e098afd4189802882af1a58340413383",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://79b9682babbd66cb8210d7d38a77d705e3accdc2b45e03a24f5544bffeaded48",
-				"dweb:/ipfs/QmVKU3NPozpC4mpXgtgrjcQje8wbi6eaAYZgRpxiae6Tfz"
+				"bzz-raw://1d71bde72e9bc44cf7f82a1f9e45bb9fb33f2deec1c60c0868fe8ca91892e4e8",
+				"dweb:/ipfs/QmQdnwD8QUai8PgETdkhwfUtbxvD3N8tV8aMrfotYWgHry"
 			]
 		}
 	},

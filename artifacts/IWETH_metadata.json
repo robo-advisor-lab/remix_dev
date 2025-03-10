@@ -139,7 +139,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"buy_back.sol": "IWETH"
+			"bonding_contract.sol": "IWETH"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -147,18 +147,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"buy_back.sol": {
-			"keccak256": "0x6ca00499fd7cebd8ae636e743a511bc803a978a089bf33cee1a51aca6140f2f0",
+		"bonding_contract.sol": {
+			"keccak256": "0x1876206f04e117a4256e1be5fc93ba3d36e80f13befc795b53ee68ce259e5401",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://01294f177ea27462fb06c6f53da8bdfec9b8a65f68705c072927501b35cd262c",
-				"dweb:/ipfs/Qmbe118Y2HX8W6GbGFzyDDzNMUmKoGz2Qm8UUNUSRqiRFg"
+				"bzz-raw://62d55aaa95241e864985384ad58067566c3a96db627e0def9efea24fd14200c0",
+				"dweb:/ipfs/QmcQg6ihJi8EDpywe6J9hpiHracKaEKDi55gQFiVxdaf7B"
 			]
 		}
 	},

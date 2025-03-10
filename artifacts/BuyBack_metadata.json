@@ -9,17 +9,17 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_weth",
+						"name": "_paymentToken",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "_mlAMPL",
+						"name": "_roboMoney",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "_discountRate",
+						"name": "_premiumRate",
 						"type": "uint256"
 					},
 					{
@@ -43,13 +43,13 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "mlAMPLAmount",
+						"name": "roboMoneyAmount",
 						"type": "uint256"
 					},
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "wethSpent",
+						"name": "tokenSpent",
 						"type": "uint256"
 					}
 				],
@@ -79,7 +79,7 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "mlAMPLAmount",
+						"name": "roboMoneyAmount",
 						"type": "uint256"
 					}
 				],
@@ -92,7 +92,7 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "mlAMPLAmount",
+						"name": "roboMoneyAmount",
 						"type": "uint256"
 					}
 				],
@@ -109,7 +109,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "contractWETHBalance",
+				"name": "contractTokenBalance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -128,32 +128,19 @@
 						"type": "uint256"
 					}
 				],
-				"name": "depositWETH",
+				"name": "depositPaymentToken",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "discountRate",
+				"name": "maxBuyableRoboMoney",
 				"outputs": [
 					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "mlAMPL",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -173,14 +160,53 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "paymentToken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "premiumRate",
+				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "_discountRate",
+						"name": "",
 						"type": "uint256"
 					}
 				],
-				"name": "setDiscountRate",
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "roboMoney",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_premiumRate",
+						"type": "uint256"
+					}
+				],
+				"name": "setPremiumRate",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -225,19 +251,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "weth",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -245,7 +258,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "withdrawWETH",
+				"name": "withdrawPaymentToken",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -253,12 +266,37 @@
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"buyback(uint256)": {
+					"params": {
+						"roboMoneyAmount": "Amount of RoboMoney tokens to sell/buy back."
+					}
+				},
+				"canExecuteBuyback(uint256)": {
+					"details": "Checks if the contract has enough payment tokens to buy back `roboMoneyAmount` at the current premium rate."
+				},
+				"contractTokenBalance()": {
+					"details": "Returns the current contract balance of the payment token."
+				},
+				"depositPaymentToken(uint256)": {
+					"details": "Owner can deposit payment tokens into the contract to fund future buybacks."
+				},
+				"maxBuyableRoboMoney()": {
+					"details": "Returns the maximum amount of RoboMoney the contract can buy back given its current payment token balance and the premium rate."
+				},
+				"withdrawPaymentToken(uint256)": {
+					"details": "Owner can withdraw payment tokens from the contract (for leftover tokens, etc.)."
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
 			"kind": "user",
-			"methods": {},
+			"methods": {
+				"buyback(uint256)": {
+					"notice": "Buys back RoboMoney from msg.sender at the configured premium rate, paying out the specified ERC20 `paymentToken`, and then burns the RoboMoney."
+				}
+			},
 			"version": 1
 		}
 	},
@@ -272,18 +310,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"buy_back.sol": {
-			"keccak256": "0x6ca00499fd7cebd8ae636e743a511bc803a978a089bf33cee1a51aca6140f2f0",
+			"keccak256": "0xa084f84f0d5c8c3012d26f9a77f7238d90be6ccd424d7a337fbacdaa02288b1a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://01294f177ea27462fb06c6f53da8bdfec9b8a65f68705c072927501b35cd262c",
-				"dweb:/ipfs/Qmbe118Y2HX8W6GbGFzyDDzNMUmKoGz2Qm8UUNUSRqiRFg"
+				"bzz-raw://b301792bdcce8127e2c2f29d1ff1619d24938df581cbf7147e0b962a9378b070",
+				"dweb:/ipfs/QmQzaAan5PA7sMBXt7xHUUcLWa4MbxVHswrGe5Z5qBjMBf"
 			]
 		}
 	},

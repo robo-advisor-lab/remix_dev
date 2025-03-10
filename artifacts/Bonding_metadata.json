@@ -9,12 +9,12 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_weth",
+						"name": "_paymentToken",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "_mlAMPL",
+						"name": "_roboMoney",
 						"type": "address"
 					},
 					{
@@ -43,13 +43,13 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "wethAmount",
+						"name": "tokenAmount",
 						"type": "uint256"
 					},
 					{
 						"indexed": false,
 						"internalType": "uint256",
-						"name": "mlAMPLAmount",
+						"name": "roboMoneyAmount",
 						"type": "uint256"
 					}
 				],
@@ -123,7 +123,7 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "wethAmount",
+						"name": "tokenAmount",
 						"type": "uint256"
 					}
 				],
@@ -134,7 +134,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "checkContractMLAMPLBalance",
+				"name": "checkContractRoboMoneyBalance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -153,7 +153,7 @@
 						"type": "address"
 					}
 				],
-				"name": "checkMLAMPLBalance",
+				"name": "checkRoboMoneyBalance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -172,7 +172,7 @@
 						"type": "address"
 					}
 				],
-				"name": "checkWETHAllowance",
+				"name": "checkTokenAllowance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -191,7 +191,7 @@
 						"type": "address"
 					}
 				],
-				"name": "checkWETHBalance",
+				"name": "checkTokenBalance",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -217,7 +217,7 @@
 			},
 			{
 				"inputs": [],
-				"name": "mlAMPL",
+				"name": "owner",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -230,7 +230,20 @@
 			},
 			{
 				"inputs": [],
-				"name": "owner",
+				"name": "paymentToken",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "roboMoney",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -294,19 +307,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "weth",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -332,7 +332,42 @@
 		],
 		"devdoc": {
 			"kind": "dev",
-			"methods": {},
+			"methods": {
+				"bond(uint256)": {
+					"details": "The main bonding function: user deposits `paymentToken` (e.g., DAI, USDC, etc.) to receive RoboMoney at a discount.",
+					"params": {
+						"tokenAmount": "The amount of `paymentToken` the user is depositing."
+					}
+				},
+				"checkContractRoboMoneyBalance()": {
+					"details": "Check how many RoboMoney tokens the contract itself holds."
+				},
+				"checkRoboMoneyBalance(address)": {
+					"details": "Check the RoboMoney token balance of any user."
+				},
+				"checkTokenAllowance(address)": {
+					"details": "Check how much of the payment token (ERC20) the user has approved for this contract."
+				},
+				"checkTokenBalance(address)": {
+					"details": "Check the payment token (ERC20) balance of any user."
+				},
+				"constructor": {
+					"params": {
+						"_discountRate": "Discount in percent (0–100).",
+						"_paymentToken": "Address of the ERC20 token used for bonding (replaces WETH).",
+						"_roboMoney": "Address of the RoboMoney token (replaces mlAMPL).",
+						"_targetPrice": "“Base” price ratio for roboMoney vs. payment token."
+					}
+				},
+				"withdraw(address,uint256,address)": {
+					"details": "Owner can withdraw any ERC20 tokens (e.g. leftover paymentToken or minted RoboMoney).",
+					"params": {
+						"amount": "Amount to withdraw.",
+						"recipient": "Recipient address to receive the tokens.",
+						"token": "Address of the ERC20 token to withdraw."
+					}
+				}
+			},
 			"version": 1
 		},
 		"userdoc": {
@@ -351,18 +386,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"bonding_contract.sol": {
-			"keccak256": "0x1876206f04e117a4256e1be5fc93ba3d36e80f13befc795b53ee68ce259e5401",
+			"keccak256": "0x93df4d2825e0bdb0211f29a686298f5d979461eeefb5bbe992d361d3294f92ef",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://62d55aaa95241e864985384ad58067566c3a96db627e0def9efea24fd14200c0",
-				"dweb:/ipfs/QmcQg6ihJi8EDpywe6J9hpiHracKaEKDi55gQFiVxdaf7B"
+				"bzz-raw://0108dd4e3a4394d5c64711f2d6fa0c41a9477a7645fb72e27b8d1051073084eb",
+				"dweb:/ipfs/QmZSbMwzMNjjx22HbXhhddXu8GfLcT9CnYEocn9V5wgcf7"
 			]
 		}
 	},
