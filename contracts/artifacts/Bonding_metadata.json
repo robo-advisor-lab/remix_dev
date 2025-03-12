@@ -301,6 +301,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_targetPrice",
+						"type": "uint256"
+					}
+				],
+				"name": "setTargetPrice",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "targetPrice",
 				"outputs": [
@@ -362,9 +375,9 @@
 			"kind": "dev",
 			"methods": {
 				"bond(uint256)": {
-					"details": "Marked `whenNotPaused`. If the contract is paused, this function      will revert. The owner can call `pause()`/`unpause()` as needed.",
+					"details": "Marked whenNotPaused. If the contract is paused, this function      will revert. The owner can call pause()/unpause() as needed.",
 					"params": {
-						"tokenAmount": "The amount of `paymentToken` the user is depositing."
+						"tokenAmount": "The amount of paymentToken the user is depositing."
 					}
 				},
 				"constructor": {
@@ -376,13 +389,13 @@
 					}
 				},
 				"pause()": {
-					"details": "Owner can pause contract functions protected by `whenNotPaused`."
+					"details": "Owner can pause contract functions protected by whenNotPaused."
 				},
 				"unpause()": {
 					"details": "Owner can unpause contract functions."
 				},
 				"withdraw(address,uint256,address)": {
-					"details": "Owner can withdraw any ERC20 tokens (e.g. leftover paymentToken or minted RoboMoney).Not protected by `whenNotPaused`, since an owner might need       to withdraw tokens even if contract is paused for bonding.",
+					"details": "Owner can withdraw any ERC20 tokens (e.g. leftover paymentToken or minted RoboMoney).Not protected by whenNotPaused, since an owner might need       to withdraw tokens even if contract is paused for bonding.",
 					"params": {
 						"amount": "Amount to withdraw.",
 						"recipient": "Recipient address to receive the tokens.",
@@ -397,7 +410,7 @@
 			"kind": "user",
 			"methods": {
 				"bond(uint256)": {
-					"notice": "The main bonding function: user deposits `paymentToken` to receive RoboMoney at a discount."
+					"notice": "The main bonding function: user deposits paymentToken to receive RoboMoney at a discount."
 				}
 			},
 			"version": 1
@@ -420,11 +433,11 @@
 	},
 	"sources": {
 		"contracts/bonding_contract.sol": {
-			"keccak256": "0x172f4c88baf182b332cf75c06865d7fcf2b3a68164aff8fc3e46bc6b7e7814f3",
+			"keccak256": "0x7e5457120b0353b7b0c17f808339ee39549d844131edb251f464c8be67a9a8af",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://5b9020343cab3b2fa8da406b4070c9bd1701cf758c1538009b4b1b3db4dde46c",
-				"dweb:/ipfs/QmRRNCPwnE5Y1g7D7WH9C17HUm3B89MWFjZEDWLBxmYFZZ"
+				"bzz-raw://ca9b17a8a711e2394bb9000d7cc7589ebad23b67be2899ccfa29a2bfd4fa9bf2",
+				"dweb:/ipfs/QmaD4sKwFccFJPgnGnoVee1owzkTkDaC6zk4jtYBaHkkMC"
 			]
 		}
 	},

@@ -1,5 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";  // Import OpenZeppelin's IERC20
+
+using SafeERC20 for IERC20;
 
 /**
  * @dev Import the OpenZeppelin Pausable contract.
@@ -49,13 +55,13 @@ abstract contract Pausable {
 /**
  * @dev Generic ERC20 interface
  */
-interface IERC20 {
-    function approve(address spender, uint256 amount) external returns (bool);
-    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
-    function transfer(address recipient, uint256 amount) external returns (bool);
-    function balanceOf(address account) external view returns (uint256);
-    function allowance(address owner, address spender) external view returns (uint256);
-}
+// interface IERC20 {
+//     function approve(address spender, uint256 amount) external returns (bool);
+//     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+//     function transfer(address recipient, uint256 amount) external returns (bool);
+//     function balanceOf(address account) external view returns (uint256);
+//     function allowance(address owner, address spender) external view returns (uint256);
+// }
 
 /**
  * @dev RoboMoney (or RoboMoneyAlpha) interface
@@ -77,30 +83,38 @@ interface IRoboMoney {
  *      and then burns the RoboMoney tokens.
  *      Now includes Pausable functionality so the owner can temporarily halt deposits or buybacks.
  */
-contract BuyBack is Pausable {
+contract BuyBack is Pausable, ReentrancyGuard {
     address public owner;
     address public paymentToken;   // ERC20 token used to buy back RoboMoney
     address public roboMoney;      // Address of the RoboMoney (or RoboMoneyAlpha) token
+    address public gasReserve;
 
     // e.g., premiumRate = 5 => 5% premium
     // e.g., targetPrice = 1e18 => 1 RoboMoney per 1 paymentToken in Wei
     uint256 public premiumRate;    // Premium in %
     uint256 public targetPrice;    // Exchange ratio (RoboMoney -> paymentToken)
+    uint256 public taxRate;
 
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
     event BuyBackExecuted(address indexed buyer, uint256 roboMoneyAmount, uint256 tokenSpent);
+    event GasReserveUpdated(address indexed oldGasReserve, address indexed newGasReserve);
+    event TaxRateUpdated(uint256 oldTaxRate, uint256 newTaxRate);
 
     constructor(
         address _paymentToken,
         address _roboMoney,
+        address _gasReserve,
         uint256 _premiumRate,
-        uint256 _targetPrice
+        uint256 _targetPrice,
+        uint256 _taxRate
     ) {
         owner = msg.sender;
         paymentToken = _paymentToken;
+        gasReserve = _gasReserve;
         roboMoney = _roboMoney;
         premiumRate = _premiumRate;
         targetPrice = _targetPrice;
+        taxRate = _taxRate;
     }
 
     modifier onlyOwner() {
@@ -149,12 +163,12 @@ contract BuyBack is Pausable {
 
     /**
      * @notice Buys back RoboMoney from msg.sender at the configured premium rate,
-     * paying out the specified ERC20 `paymentToken`, and then burns the RoboMoney.
+     * paying out the specified ERC20 paymentToken, and then burns the RoboMoney.
      * @param roboMoneyAmount Amount of RoboMoney tokens to sell/buy back.
      *
-     * @dev `whenNotPaused` ensures no buybacks are processed if contract is paused.
+     * @dev whenNotPaused ensures no buybacks are processed if contract is paused.
      */
-    function buyback(uint256 roboMoneyAmount) external whenNotPaused {
+    function buyback(uint256 roboMoneyAmount) external whenNotPaused nonReentrant {
         require(roboMoneyAmount > 0, "Must deposit RoboMoney");
 
         // Check allowance for RoboMoney
@@ -162,8 +176,7 @@ contract BuyBack is Pausable {
         require(allowed >= roboMoneyAmount, "Insufficient RoboMoney allowance");
 
         // Transfer RoboMoney from user to contract
-        bool transferred = IRoboMoney(roboMoney).transferFrom(msg.sender, address(this), roboMoneyAmount);
-        require(transferred, "RoboMoney transfer failed");
+        IERC20(roboMoney).safeTransferFrom(msg.sender, address(this), roboMoneyAmount);
 
         // Calculate the paymentToken amount with the premium applied
         // premiumPrice = targetPrice * (100 + premiumRate) / 100
@@ -174,9 +187,12 @@ contract BuyBack is Pausable {
         uint256 currentBalance = IERC20(paymentToken).balanceOf(address(this));
         require(currentBalance >= tokenAmount, "Not enough paymentToken in contract");
 
-        // Transfer paymentToken to the user
-        bool tokenSent = IERC20(paymentToken).transfer(msg.sender, tokenAmount);
-        require(tokenSent, "Payment token transfer failed");
+        // Transfer paymentToken to the 
+        uint256 taxAmount = (tokenAmount * taxRate) / 10000;
+        uint256 userAmount = tokenAmount - taxAmount;
+
+        IERC20(paymentToken).safeTransfer(gasReserve, taxAmount);
+        IERC20(paymentToken).safeTransfer(msg.sender, userAmount);
 
         // Burn the RoboMoney tokens in the contract
         IRoboMoney(roboMoney).burn(address(this), roboMoneyAmount);
@@ -186,12 +202,24 @@ contract BuyBack is Pausable {
 
     /**
      * @dev Owner can deposit payment tokens into the contract to fund future buybacks.
-     * @dev Protected by `whenNotPaused` so you can prevent deposits if needed.
+     * @dev Protected by whenNotPaused so you can prevent deposits if needed.
      */
     function depositPaymentToken(uint256 amount) external onlyOwner whenNotPaused {
         require(amount > 0, "Deposit must be > 0");
         bool success = IERC20(paymentToken).transferFrom(msg.sender, address(this), amount);
         require(success, "Payment token deposit failed");
+    }
+
+    function setGasReserve(address _newGasReserve) external onlyOwner {
+        require(_newGasReserve != address(0), "Invalid address");
+        emit GasReserveUpdated(gasReserve, _newGasReserve);
+        gasReserve = _newGasReserve;
+    }
+
+    function setTaxRate(uint256 _newTaxRate) external onlyOwner {
+        require(_newTaxRate <= 1000, "Tax too high");
+        emit TaxRateUpdated(taxRate, _newTaxRate);
+        taxRate = _newTaxRate;
     }
 
     /**
@@ -229,7 +257,7 @@ contract BuyBack is Pausable {
     }
 
     /**
-     * @dev Checks if the contract has enough payment tokens to buy back `roboMoneyAmount`
+     * @dev Checks if the contract has enough payment tokens to buy back roboMoneyAmount
      *      at the current premium rate.
      */
     function canExecuteBuyback(uint256 roboMoneyAmount) external view returns (bool) {

@@ -155,11 +155,11 @@
 	},
 	"sources": {
 		"contracts/buy_back.sol": {
-			"keccak256": "0xfb4d583ece73a105447df2577e6ce8d127190da23885a1e0dd3c4368e226b895",
+			"keccak256": "0x31c340fb0daaaaf5751810cda29bac74d5dfa0a8c5a24406de82916633177816",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4ddb090997facf8b0a9f6cfd32723115298b5326bad6b0650dd1b4f2eb2f616d",
-				"dweb:/ipfs/QmaYkxCHSSyfZrWQCgQRWxJL8pFS9RdCf6DJHGhYshoETt"
+				"bzz-raw://e23c33e99be60115ac5aba5b14af5e0cd01b3e3d8c48652a44fb7e094ece3904",
+				"dweb:/ipfs/QmV8TBUYQxTJDGsameoH4vPHr5CSARS7Fav8H51fgSx92s"
 			]
 		}
 	},
