@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.28+commit.7893614a"
+		"version": "0.8.26+commit.8a97fa7a"
 	},
 	"language": "Solidity",
 	"output": {
@@ -18,6 +18,16 @@
 						"type": "address"
 					},
 					{
+						"internalType": "address",
+						"name": "_bondReceiver",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_gasReserve",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "_discountRate",
 						"type": "uint256"
@@ -26,10 +36,26 @@
 						"internalType": "uint256",
 						"name": "_targetPrice",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_taxRate",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					}
+				],
+				"name": "SafeERC20FailedOperation",
+				"type": "error"
 			},
 			{
 				"anonymous": false,
@@ -60,19 +86,38 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "message",
-						"type": "string"
+						"indexed": true,
+						"internalType": "address",
+						"name": "oldBondReceiver",
+						"type": "address"
 					},
 					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "value",
-						"type": "uint256"
+						"indexed": true,
+						"internalType": "address",
+						"name": "newBondReceiver",
+						"type": "address"
 					}
 				],
-				"name": "Debug",
+				"name": "BondReceiverUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "oldGasReserve",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newGasReserve",
+						"type": "address"
+					}
+				],
+				"name": "GasReserveUpdated",
 				"type": "event"
 			},
 			{
@@ -112,37 +157,31 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "address",
-						"name": "account",
-						"type": "address"
+						"internalType": "uint256",
+						"name": "oldTaxRate",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "newTaxRate",
+						"type": "uint256"
 					}
 				],
-				"name": "Unpaused",
+				"name": "TaxRateUpdated",
 				"type": "event"
 			},
 			{
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "token",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "recipient",
-						"type": "address"
-					},
-					{
 						"indexed": false,
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
 					}
 				],
-				"name": "Withdrawn",
+				"name": "Unpaused",
 				"type": "event"
 			},
 			{
@@ -156,6 +195,19 @@
 				"name": "bond",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "bondReceiver",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -243,6 +295,19 @@
 			},
 			{
 				"inputs": [],
+				"name": "gasReserve",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -303,6 +368,32 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_newBondReceiver",
+						"type": "address"
+					}
+				],
+				"name": "setBondReceiver",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_newGasReserve",
+						"type": "address"
+					}
+				],
+				"name": "setGasReserve",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "_targetPrice",
 						"type": "uint256"
@@ -314,8 +405,34 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_newTaxRate",
+						"type": "uint256"
+					}
+				],
+				"name": "setTaxRate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "targetPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "taxRate",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -345,33 +462,17 @@
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "token",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "recipient",
-						"type": "address"
-					}
-				],
-				"name": "withdraw",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			}
 		],
 		"devdoc": {
 			"details": "Demonstrates how to add pausing to the Bonding contract.",
+			"errors": {
+				"SafeERC20FailedOperation(address)": [
+					{
+						"details": "An operation with an ERC-20 token failed."
+					}
+				]
+			},
 			"kind": "dev",
 			"methods": {
 				"bond(uint256)": {
@@ -382,6 +483,7 @@
 				},
 				"constructor": {
 					"params": {
+						"_bondReceiver": "Address of the receiver of bonded payments.",
 						"_discountRate": "Discount in percent (0–100).",
 						"_paymentToken": "Address of the ERC20 token used for bonding (DAI, USDC, etc.).",
 						"_roboMoney": "Address of the RoboMoney token (replaces mlAMPL).",
@@ -393,14 +495,6 @@
 				},
 				"unpause()": {
 					"details": "Owner can unpause contract functions."
-				},
-				"withdraw(address,uint256,address)": {
-					"details": "Owner can withdraw any ERC20 tokens (e.g. leftover paymentToken or minted RoboMoney).Not protected by whenNotPaused, since an owner might need       to withdraw tokens even if contract is paused for bonding.",
-					"params": {
-						"amount": "Amount to withdraw.",
-						"recipient": "Recipient address to receive the tokens.",
-						"token": "Address of the ERC20 token to withdraw."
-					}
 				}
 			},
 			"title": "Bonding",
@@ -426,18 +520,74 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"contracts/bonding_contract.sol": {
-			"keccak256": "0x7e5457120b0353b7b0c17f808339ee39549d844131edb251f464c8be67a9a8af",
+		"@openzeppelin/contracts/interfaces/IERC1363.sol": {
+			"keccak256": "0x9b6b3e7803bc5f2f8cd7ad57db8ac1def61a9930a5a3107df4882e028a9605d7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ca9b17a8a711e2394bb9000d7cc7589ebad23b67be2899ccfa29a2bfd4fa9bf2",
-				"dweb:/ipfs/QmaD4sKwFccFJPgnGnoVee1owzkTkDaC6zk4jtYBaHkkMC"
+				"bzz-raw://da62d6be1f5c6edf577f0cb45666a8aa9c2086a4bac87d95d65f02e2f4c36a4b",
+				"dweb:/ipfs/QmNkpvBpoCMvX8JwAFNSc5XxJ2q5BXJpL5L1txb4QkqVFF"
+			]
+		},
+		"@openzeppelin/contracts/interfaces/IERC165.sol": {
+			"keccak256": "0xde7e9fd9aee8d4f40772f96bb3b58836cbc6dfc0227014a061947f8821ea9724",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://11fea9f8bc98949ac6709f0c1699db7430d2948137aa94d5a9e95a91f61a710a",
+				"dweb:/ipfs/QmQdfRXxQjwP6yn3DVo1GHPpriKNcFghSPi94Z1oKEFUNS"
+			]
+		},
+		"@openzeppelin/contracts/interfaces/IERC20.sol": {
+			"keccak256": "0xce41876e78d1badc0512229b4d14e4daf83bc1003d7f83978d18e0e56f965b9c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a2608291cb038b388d80b79a06b6118a42f7894ff67b7da10ec0dbbf5b2973ba",
+				"dweb:/ipfs/QmWohqcBLbcxmA4eGPhZDXe5RYMMEEpFq22nfkaUMvTfw1"
+			]
+		},
+		"@openzeppelin/contracts/security/ReentrancyGuard.sol": {
+			"keccak256": "0xa535a5df777d44e945dd24aa43a11e44b024140fc340ad0dfe42acf4002aade1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://41319e7f621f2dc3733511332c4fd032f8e32ad2aa7fd6f665c19741d9941a34",
+				"dweb:/ipfs/QmcYR3bd862GD1Bc7jwrU9bGxrhUu5na1oP964bDCu2id1"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+			"keccak256": "0xe06a3f08a987af6ad2e1c1e774405d4fe08f1694b67517438b467cecf0da0ef7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://df6f0c459663c9858b6cba2cda1d14a7d05a985bed6d2de72bd8e78c25ee79db",
+				"dweb:/ipfs/QmeTTxZ7qVk9rjEv2R4CpCwdf8UMCcRqDNMvzNxHc3Fnn9"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
+			"keccak256": "0x4ea01544758fd2c7045961904686bfe232d2220a04ecaa2d6b08dac17827febf",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fabe6bef5167ae741dd8c22d7f81d3f9120bd61b290762a2e8f176712567d329",
+				"dweb:/ipfs/QmSnEitJ6xmf1SSAUeZozD7Gx7h8bNnX3a1ZBzqeivsvVg"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x79796192ec90263f21b464d5bc90b777a525971d3de8232be80d9c4f9fb353b8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f6fda447a62815e8064f47eff0dd1cf58d9207ad69b5d32280f8d7ed1d1e4621",
+				"dweb:/ipfs/QmfDRc7pxfaXB2Dh9np5Uf29Na3pQ7tafRS684wd3GLjVL"
+			]
+		},
+		"contracts/bonding_contract.sol": {
+			"keccak256": "0x350bdf10bce7047bccc9109d93ca6d6b9b121fea3d87b227ab74f5a0075bb4d3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ca1a79c3d516a8f577b2218919a7a8f8e77ed3919c85e3d505342f35a41d306",
+				"dweb:/ipfs/QmPGqbxT8ZaDqzdtfqZVf8vN7rgxFHPDKxg18cP5ZW9BYm"
 			]
 		}
 	},

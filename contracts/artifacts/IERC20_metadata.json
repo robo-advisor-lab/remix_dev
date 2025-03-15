@@ -1,10 +1,60 @@
 {
 	"compiler": {
-		"version": "0.8.28+commit.7893614a"
+		"version": "0.8.26+commit.8a97fa7a"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "spender",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Approval",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					}
+				],
+				"name": "Transfer",
+				"type": "event"
+			},
 			{
 				"inputs": [
 					{
@@ -73,6 +123,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "totalSupply",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -127,7 +190,6 @@
 			}
 		],
 		"devdoc": {
-			"details": "Generic ERC20 interface",
 			"kind": "dev",
 			"methods": {},
 			"version": 1
@@ -140,7 +202,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/buy_back.sol": "IERC20"
+			"contracts/bonding_full.sol": "IERC20"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -148,18 +210,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
-		"contracts/buy_back.sol": {
-			"keccak256": "0x31c340fb0daaaaf5751810cda29bac74d5dfa0a8c5a24406de82916633177816",
+		"contracts/bonding_full.sol": {
+			"keccak256": "0xed8f9d1fad7a22ba70a45513afd29ec938f9827d6c9d0257bb915a338c283d05",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e23c33e99be60115ac5aba5b14af5e0cd01b3e3d8c48652a44fb7e094ece3904",
-				"dweb:/ipfs/QmV8TBUYQxTJDGsameoH4vPHr5CSARS7Fav8H51fgSx92s"
+				"bzz-raw://cbc5004a826293c711d7466f3d53d314b81809071c5b67a8e7a2ebbd9f0f9d76",
+				"dweb:/ipfs/QmVjUy9x1HGRaxDoP1Ao3rkN1gvfpw343SrzmA7B9JZJeM"
 			]
 		}
 	},

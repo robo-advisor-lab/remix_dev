@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.28+commit.7893614a"
+		"version": "0.8.26+commit.8a97fa7a"
 	},
 	"language": "Solidity",
 	"output": {
@@ -46,7 +46,7 @@
 			}
 		],
 		"devdoc": {
-			"details": "For demonstration, here is a minimal Pausable definition inlined. In a real project, just import from OpenZeppelin as shown above.",
+			"details": "For demonstration, let's define our own basic Pausable interface (if you didn't want a direct import). But in a production setting, you'd import from OpenZeppelin.",
 			"kind": "dev",
 			"methods": {},
 			"version": 1
@@ -59,7 +59,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/buy_back.sol": "Pausable"
+			"contracts/bonding_contract.sol": "Pausable"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -67,7 +67,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -114,27 +114,11 @@
 			]
 		},
 		"@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol": {
-			"keccak256": "0xca2ae13e0610f6a99238dd00b97bd786bc92732dae6d6b9d61f573ec51018310",
+			"keccak256": "0x4ea01544758fd2c7045961904686bfe232d2220a04ecaa2d6b08dac17827febf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://75f8c71ce0c91c40dd5f249ace0b7d8270f8f1767231bcf71490f7157d6ba862",
-				"dweb:/ipfs/QmYXgxeDyFHvz3JsXxLEYN6GNUR44ThHeFj5XkpkgMoG4w"
-			]
-		},
-		"@openzeppelin/contracts/utils/Address.sol": {
-			"keccak256": "0x9d8da059267bac779a2dbbb9a26c2acf00ca83085e105d62d5d4ef96054a47f5",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://c78e2aa4313323cecd1ef12a8d6265b96beee1a199923abf55d9a2a9e291ad23",
-				"dweb:/ipfs/QmUTs2KStXucZezzFo3EYeqYu47utu56qrF7jj1Gue65vb"
-			]
-		},
-		"@openzeppelin/contracts/utils/Errors.sol": {
-			"keccak256": "0x6afa713bfd42cf0f7656efa91201007ac465e42049d7de1d50753a373648c123",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://ba1d02f4847670a1b83dec9f7d37f0b0418d6043447b69f3a29a5f9efc547fcf",
-				"dweb:/ipfs/QmQ7iH2keLNUKgq2xSWcRmuBE5eZ3F5whYAkAGzCNNoEWB"
+				"bzz-raw://fabe6bef5167ae741dd8c22d7f81d3f9120bd61b290762a2e8f176712567d329",
+				"dweb:/ipfs/QmSnEitJ6xmf1SSAUeZozD7Gx7h8bNnX3a1ZBzqeivsvVg"
 			]
 		},
 		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
@@ -145,12 +129,12 @@
 				"dweb:/ipfs/QmfDRc7pxfaXB2Dh9np5Uf29Na3pQ7tafRS684wd3GLjVL"
 			]
 		},
-		"contracts/buy_back.sol": {
-			"keccak256": "0x4b367e4b7e355b93a37b0f1467692f83208deb1230c3add80fd1ec4807e773c5",
+		"contracts/bonding_contract.sol": {
+			"keccak256": "0x350bdf10bce7047bccc9109d93ca6d6b9b121fea3d87b227ab74f5a0075bb4d3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7a3e16d872b521277fc1b7bb860a975073d2f49f1ef56a56395cab452a03b6f4",
-				"dweb:/ipfs/QmdMvAJYpvhvGmwBLYpNhy5ST6UuRZWfoM6bJs55uHum6J"
+				"bzz-raw://8ca1a79c3d516a8f577b2218919a7a8f8e77ed3919c85e3d505342f35a41d306",
+				"dweb:/ipfs/QmPGqbxT8ZaDqzdtfqZVf8vN7rgxFHPDKxg18cP5ZW9BYm"
 			]
 		}
 	},
